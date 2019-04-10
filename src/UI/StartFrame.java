@@ -9,6 +9,7 @@ public class StartFrame extends JFrame {
     private JPanel startPanel;
     private boolean hasStarted;
     private int size;
+    private int player1Choice, player2Choice;
 
     public StartFrame() {
         this.hasStarted = false;
@@ -19,7 +20,7 @@ public class StartFrame extends JFrame {
         this.setVisible(true);
     }
 
-    public int startReturnSize(){
+    public int[] startReturnValues(){
         while(true){
             System.out.print(' ');  // loop never terminates without this
             long now = System.currentTimeMillis();
@@ -30,11 +31,15 @@ public class StartFrame extends JFrame {
                 break;
             }
         }
-        return this.size;
+        int[]returnArray;
+        returnArray = new int[]{this.size,this.player1Choice,this.player2Choice};
+        return returnArray;
     }
 
-    public void setHasStartedSize(boolean b, int theSize){
+    public void setHasStartedSize(boolean b, int theSize, int player1Choice, int player2Choice){
         this.size = theSize;
+        this.player1Choice = player1Choice;
+        this.player2Choice = player2Choice;
         this.hasStarted = b;
     }
 

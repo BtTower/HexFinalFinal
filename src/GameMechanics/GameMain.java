@@ -6,6 +6,7 @@ import UI.BoardFrame;
 
 import java.awt.*;
 import java.util.Random;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by Gleb on 10/04/2019.
@@ -16,32 +17,54 @@ public class GameMain {
     private PlayerInterface player2;    // player 2 = blue
 
 
-    public GameMain(int size){
+    public GameMain(int size,int player1Choice, int player2Choice){
         this.size = size;
-        player1 = new RandomPlayer(size,1);
-        player2 = new RandomPlayer(size,2);
+        player1 = selectPlayers(player1Choice,1);
+        player2 = selectPlayers(player2Choice,2);
     }
 
-    public void startGame(){
+    public RandomPlayer selectPlayers(int playerChoice, int playerNumber){
+        switch (playerChoice){
+            case 0:
+                return new RandomPlayer(size,playerNumber);
+                default:
+                    System.out.println("Error in player selector");
+        }
+        System.out.println("error in player selector");
+        return null;
+    }
+
+    public int startGame(){
         BoardFrame frame = new BoardFrame(size);
         int moveCounter = 0;
-        int move =0;
         while(!player1.getHasWon() && !player2.getHasWon()){
-
-            int moveOF = (moveCounter%2);
-            if(moveOF == 0){
+//            long now = System.currentTimeMillis();
+//            long delta = 500;
+//            while(System.currentTimeMillis()<now+delta){
+//            }
+            int move;
+            if(moveCounter%2 == 0){
                 move = player1.getMove();
                 player2.updateOpponentsMove(move);
             } else {
                 move = player2.getMove();
                 player1.updateOpponentsMove(move);
             }
-            System.out.println(move);
-            frame.updateBoardAt(moveOF+1,move);
+            frame.updateBoardAt((moveCounter%2)+1,move);
             frame.repaint();
-            moveCounter++;
-
+            moveCounter ++;
         }
-        System.out.println("done" + moveCounter + "winner is " + ((moveCounter%2)));
+        return ((moveCounter+1)%2 + 1);
+    }
+
+    public void test(){
+        System.out.print("1: ");
+        int move = player1.getMove();
+        System.out.print("1: ");
+        player2.updateOpponentsMove(move);
+        System.out.print("2: ");
+        move=player2.getMove();
+        System.out.print("2: ");
+        player1.updateOpponentsMove(move);
     }
 }

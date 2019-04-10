@@ -17,6 +17,8 @@ public class AdjacecyMatrix {
         this.initMatrix();
     }
 
+
+
     private void initMatrix(){
         adjMat = new int[size*size + 2][ size*size + 2];
         int i = 0;
