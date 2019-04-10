@@ -15,12 +15,14 @@ public class GameMain {
     private int size;
     private PlayerInterface player1;    // player 1 = red
     private PlayerInterface player2;    // player 2 = blue
+    private int player1Choice,player2Choice;
 
 
     public GameMain(int size,int player1Choice, int player2Choice){
+        this.player1Choice = player1Choice;
+        this.player2Choice = player2Choice;
         this.size = size;
-        player1 = selectPlayers(player1Choice,1);
-        player2 = selectPlayers(player2Choice,2);
+
     }
 
     public RandomPlayer selectPlayers(int playerChoice, int playerNumber){
@@ -35,6 +37,8 @@ public class GameMain {
     }
 
     public int startGame(){
+        player1 = selectPlayers(player1Choice,1);
+        player2 = selectPlayers(player2Choice,2);
         BoardFrame frame = new BoardFrame(size);
         int moveCounter = 0;
         while(!player1.getHasWon() && !player2.getHasWon()){
