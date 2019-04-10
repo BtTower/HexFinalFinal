@@ -30,8 +30,10 @@ public class BoardFrame extends JFrame {
         hexPanel.repaint();
     }
 
-    public void updateBoardAt(int value, int x, int y){
-        hexPanel.setBoard(value,x,y);
+    public void updateBoardAt(int value, int node){
+        int nodex = node%size;
+        int nodey = node/size;
+        hexPanel.setBoard(value,nodex,nodey);
     }
 
 }

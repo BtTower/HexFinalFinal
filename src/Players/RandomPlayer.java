@@ -1,5 +1,7 @@
 package Players;
 
+import GameMechanics.AdjacecyMatrix;
+
 import java.util.Random;
 
 /**
@@ -7,31 +9,40 @@ import java.util.Random;
  */
 public class RandomPlayer implements PlayerInterface {
     private int size;
+    private int playerNumber;
     private int [] board;
     private int freeNumber;
     private Random rand;
-    private boolean hasWon;
+    private AdjacecyMatrix adjacecyMatrix;
 
-    public RandomPlayer(int size){
-        hasWon = false;
+    public RandomPlayer(int size , int playerNumber){
         this.size = size;
         this.freeNumber = size*size;
+        this.playerNumber = playerNumber;
+        adjacecyMatrix = new AdjacecyMatrix(this.size,this.playerNumber);
+
         board = new int [size*size];      // 0 = free, 1 = taken
         rand = new Random();
     }
+
     public int getMove(){
         int randomValue = rand.nextInt(size*size);
         while(board[randomValue]!=0){
             randomValue = rand.nextInt(size*size);
         }
         board[randomValue] = 1;
+        adjacecyMatrix.nodeWon(randomValue);
+        adjacecyMatrix.displayMatrix();
+        System.out.println();
 
         return randomValue;
     }
     public boolean getHasWon(){
-        return this.hasWon;
+        return adjacecyMatrix.existsEdge(size*size,size*size+1);
     }
     public void updateOpponentsMove(int theirMove){
+        adjacecyMatrix.nodeLost(theirMove);
+        adjacecyMatrix.displayMatrix();
         board[theirMove] = 1;
     }
 }

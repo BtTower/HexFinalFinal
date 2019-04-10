@@ -12,50 +12,36 @@ import java.util.Random;
  */
 public class GameMain {
     private int size;
-    private PlayerInterface player1;
-    private PlayerInterface player2;
+    private PlayerInterface player1;    // player 1 = red
+    private PlayerInterface player2;    // player 2 = blue
+
 
     public GameMain(int size){
         this.size = size;
-        player1 = new RandomPlayer(size);
-        player2 = new RandomPlayer(size);
+        player1 = new RandomPlayer(size,1);
+        player2 = new RandomPlayer(size,2);
     }
 
     public void startGame(){
         BoardFrame frame = new BoardFrame(size);
         int moveCounter = 0;
         int move =0;
+        while(!player1.getHasWon() && !player2.getHasWon()){
 
-        for(int i =0;i<16;i++){
-//            long now = System.currentTimeMillis();
-//            long delta = 200;
-//            while(System.currentTimeMillis()<now+delta){
-//            }
-            int moveOF = (i%2) +1;
+            int moveOF = (moveCounter%2);
             if(moveOF == 0){
-                if(i==0){
-
-                } else {
-                    player1.updateOpponentsMove(move);
-                }
                 move = player1.getMove();
-                System.out.println(move);
-                int movex = move%size;
-                int movey = move/size;
-                frame.updateBoardAt(moveOF,movex,movey);
-                frame.repaint();
-                moveCounter++;
+                player2.updateOpponentsMove(move);
             } else {
                 move = player2.getMove();
-                System.out.println(move);
-                int movex = move%size;
-                int movey = move/size;
-                frame.updateBoardAt(moveOF,movex,movey);
-                frame.repaint();
-                moveCounter++;
+                player1.updateOpponentsMove(move);
             }
+            System.out.println(move);
+            frame.updateBoardAt(moveOF+1,move);
+            frame.repaint();
+            moveCounter++;
 
         }
-        System.out.println("done");
+        System.out.println("done" + moveCounter + "winner is " + ((moveCounter%2)));
     }
 }
