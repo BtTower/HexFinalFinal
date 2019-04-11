@@ -2,7 +2,7 @@ import GameMechanics.GameMain;
 import UI.StartFrame;
 
 public class Main {
-    public int test1212;
+    
 
     public static void main(String[] args) {
         StartFrame sf = new StartFrame();
