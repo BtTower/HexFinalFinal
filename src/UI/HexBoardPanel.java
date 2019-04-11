@@ -10,6 +10,7 @@ import java.awt.event.MouseEvent;
 
 import static java.lang.Math.abs;
 import static java.lang.Math.sin;
+import static java.lang.Math.sqrt;
 
 /**
  * Created by Gleb on 09/04/2019.
@@ -50,15 +51,19 @@ public class HexBoardPanel extends JPanel {
 
     }
 
+    public void setTextArea(String string){
+        this.textArea.setText(string);
+    }
+
     public void drawEdges(Graphics g){
-        int xDis = abs((int) (sl * sin(30)));  //x distance betwen 2 hexes /2
+        int xDis = abs((int) (0.5 * sl * sqrt(3)));  //x distance betwen 2 hexes /2
         g.setColor(Color.BLUE);
-        g.fillRect(75 - xDis,5 ,(size - 1)*xDis*2,30);
-        g.fillRect(75 +(size-2)*xDis ,(int)(  size*(1.5)*30 -10),(size - 1)*xDis*2,30);
+        g.fillRect(75 + xDis,5 ,(size - 1)*xDis*2,30);
+        g.fillRect(75 +(size)*xDis ,(int)(  size*(1.5)*30 -10),(size - 1)*xDis*2,30);
         g.setColor(Color.RED);
         int[] redY, redX;
         redY = new int[]{50,50,(size)*(45),(size)*(45)};
-        redX = new int[]{75 -xDis*2,100,(size)*xDis + 25,75 -xDis*2+(size-1)*xDis};
+        redX = new int[]{75,100+2*xDis,(size + 2)*xDis + 25,75-xDis*2+(size+1)*xDis};
         g.fillPolygon(redX,redY,4);
         for(int i=0;i<4;i++){
             redY[i] -= 30;
@@ -73,7 +78,7 @@ public class HexBoardPanel extends JPanel {
     public void drawSpecificHex(Graphics graphics, int x, int y){
         int x0 = 75;
         int y0 = 20;    // 1st hex coords;
-        int xDis = abs((int) (sl * sin(30)));  //x distance betwen 2 hexes /2
+        int xDis = abs((int) (0.5 *sl * sqrt(3)));  //x distance betwen 2 hexes /2
         if(board[x][y] == 1){
             graphics.setColor(Color.RED);
         } else if(board[x][y] == 2){
@@ -91,7 +96,7 @@ public class HexBoardPanel extends JPanel {
 
     public Polygon getHexagonEdges(int x0, int y0) {     // takes top right x
         int[] xc, yc;
-        int xSide = (int) (sl * sin(30));
+        int xSide = (int) (0.5 * sl * sqrt(3));
         yc = new int[]{y0, y0 + sl, y0 + (int)(1.5*sl) , y0 + sl, y0, y0 - (int)(0.5*sl)};
         xc = new int[]{x0, x0, x0 + (xSide), x0 + 2 * xSide, x0 + 2 *  xSide, x0 + xSide};  // switch xc and yc for flat orientation
         return new Polygon(xc, yc, 6);
@@ -105,6 +110,8 @@ public class HexBoardPanel extends JPanel {
     public void setBoard(int value, int x, int y){
         board[x][y] = value;
     }
+
+
 
 
     class MouseListener extends MouseAdapter {	//inner class inside DrawingPanel

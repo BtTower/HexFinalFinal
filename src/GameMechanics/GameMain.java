@@ -20,10 +20,10 @@ public class GameMain {
 
 
     public GameMain(int size,int player1Choice, int player2Choice){
+
         this.player1Choice = player1Choice;
         this.player2Choice = player2Choice;
         this.size = size;
-
     }
 
     public PlayerInterface selectPlayers(int playerChoice, int playerNumber, BoardFrame frame){
@@ -31,6 +31,7 @@ public class GameMain {
             case 0:                         // 0 = RandomPlayer
                 return new RandomPlayer(size,playerNumber);
             case 1:
+
                 return new HumanPlayer(size,playerNumber,frame);
                 default:
                     System.out.println("Error in player selector");
@@ -41,8 +42,8 @@ public class GameMain {
 
     public int startGame(){
         BoardFrame frame;
-        if(this.player1Choice == 1 || this.player2Choice == 1){
-            frame = new BoardFrame(size,1);
+        if(player2Choice == 1 || player1Choice ==1){
+            frame = new BoardFrame(size,1);    // with human player says human player on top
         } else {
             frame = new BoardFrame(size);
         }
@@ -65,7 +66,13 @@ public class GameMain {
             frame.updateBoardAt((moveCounter%2)+1,move);
             frame.repaint();
             moveCounter ++;
+
         }
+        if(player2Choice == 1 || player1Choice ==1) {
+            String string = "Player " + ((moveCounter+1)%2 + 1) + " won";
+            frame.setBoardTextArea(string);
+        }
+        System.out.println("winner player :" + ((moveCounter+1)%2 + 1) );
         return ((moveCounter+1)%2 + 1);
     }
 

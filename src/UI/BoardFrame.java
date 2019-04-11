@@ -57,4 +57,8 @@ public class BoardFrame extends JFrame {
 
     }
 
+    public void setBoardTextArea(String string){
+        this.hexPanel.setTextArea(string);
+    }
+
 }

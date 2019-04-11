@@ -35,10 +35,17 @@ public class StartPanel extends JPanel implements ActionListener {
         tf.setColumns(2);
         player1Choice = new JComboBox<>(players);
         player2Choice = new JComboBox<>(players);
-        this.add(spinner, BorderLayout.WEST);
-        this.add(button,BorderLayout.EAST);
-        this.add(player1Choice,BorderLayout.SOUTH);
-        this.add(player2Choice,BorderLayout.SOUTH);
+        JTextArea textArea = new JTextArea("Board Size       RedPlayer               BluePlayer");
+        JPanel panel2 = new JPanel(new GridLayout(2,1));
+        panel2.add(textArea,BorderLayout.NORTH);
+        JPanel panel3 = new JPanel();
+        panel3.add(spinner, BorderLayout.WEST);
+        panel3.add(player1Choice,BorderLayout.SOUTH);
+        panel3.add(player2Choice,BorderLayout.SOUTH);
+        panel3.add(button,BorderLayout.EAST);
+        panel2.add(panel3);
+        this.add(panel2,BorderLayout.SOUTH);
+
     }
 
 
