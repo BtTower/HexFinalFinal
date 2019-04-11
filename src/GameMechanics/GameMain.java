@@ -3,6 +3,7 @@ package GameMechanics;
 import Players.HumanPlayer;
 import Players.PlayerInterface;
 import Players.RandomPlayer;
+import Players.ShortestPathSimple;
 import UI.BoardFrame;
 
 import java.awt.*;
@@ -33,6 +34,8 @@ public class GameMain {
             case 1:
 
                 return new HumanPlayer(size,playerNumber,frame);
+            case 2:
+            return new ShortestPathSimple(size,playerNumber);
                 default:
                     System.out.println("Error in player selector");
         }
@@ -76,14 +79,5 @@ public class GameMain {
         return ((moveCounter+1)%2 + 1);
     }
 
-    public void test(){
-        System.out.print("1: ");
-        int move = player1.getMove();
-        System.out.print("1: ");
-        player2.updateOpponentsMove(move);
-        System.out.print("2: ");
-        move=player2.getMove();
-        System.out.print("2: ");
-        player1.updateOpponentsMove(move);
-    }
+
 }

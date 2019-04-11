@@ -32,7 +32,7 @@ public class HumanPlayer implements PlayerInterface {
 
         while(true) {
             int value[] = this.frame.getClicks();
-            while (value[0] == 0) {
+            while (value[0] == 0) {       // set to 0 in Frame, when click, values change;
                 long now = System.currentTimeMillis();
                 long delta = 100;
                 while (System.currentTimeMillis() < now + delta) {
@@ -68,7 +68,7 @@ public class HumanPlayer implements PlayerInterface {
         yCordOfHex = (int)((2./3*yPoint)/sl);
         xCordOfHex = (int)(sqrt(3)/3 *xPoint-(1./3)*yPoint)/sl;
         int hexNumber = yCordOfHex * size + xCordOfHex;
-        System.out.println("(" + xPoint + "," + yPoint + ")  =  (" + xCordOfHex +  "," + yCordOfHex + ")  Node no:" + hexNumber + "   by player: " + this.playerNumber);
+//        System.out.println("(" + xPoint + "," + yPoint + ")  =  (" + xCordOfHex +  "," + yCordOfHex + ")  Node no:" + hexNumber + "   by player: " + this.playerNumber);
         if(xCordOfHex>= this.size || xCordOfHex<0 || yCordOfHex>=this.size || yCordOfHex<0){
             hexNumber = -1;
         }

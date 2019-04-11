@@ -28,7 +28,7 @@ public class BoardFrame extends JFrame {
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         hexPanel = new HexBoardPanel(size,humanPlayer,this);
         this.getContentPane().add(hexPanel);
-        this.setSize(size*100, size*80);
+        this.setSize(size*100, size*60);
         this.setVisible(true);
         clickx = clicky = 0;
     }

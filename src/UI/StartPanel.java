@@ -24,7 +24,7 @@ public class StartPanel extends JPanel implements ActionListener {
 
 
     public StartPanel(StartFrame frame){
-        String [] players = {"Random Player", "Human player"};
+        String [] players = {"Random Player", "Human player", "ShortestPath Simple"};
         this.frame =frame;
         this.button = new JButton("Start");
         this.button.setActionCommand("Start");

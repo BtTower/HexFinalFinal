@@ -101,6 +101,17 @@ public class AdjacencyMatrix {
         adjMat[node1][node2] = adjMat[node2][node1] = 0;
     }
 
+    public int[] shortestPathBetween(int node1, int node2){
+        int [][] adjMatCopy = new int[size*size+2][size*size+2];
+        for(int i=0;i<size*size+2;i++){
+            for(int j=0;j<size*size+2;j++){
+                adjMatCopy[i][j] = adjMat[i][j];
+            }
+        }
+        MatrixShortestPath mp = new MatrixShortestPath(adjMatCopy,node1,node2,this.size);
+        return mp.getShortestPath();
+    }
+
     public boolean existsEdge(int node1, int node2){
         if(adjMat[node1][node2] > 0){
             return true;
