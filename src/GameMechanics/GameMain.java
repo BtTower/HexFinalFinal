@@ -1,5 +1,6 @@
 package GameMechanics;
 
+import Players.HumanPlayer;
 import Players.PlayerInterface;
 import Players.RandomPlayer;
 import UI.BoardFrame;
@@ -25,10 +26,12 @@ public class GameMain {
 
     }
 
-    public RandomPlayer selectPlayers(int playerChoice, int playerNumber){
-        switch (playerChoice){
-            case 0:
+    public PlayerInterface selectPlayers(int playerChoice, int playerNumber, BoardFrame frame){
+        switch (playerChoice){            // from StartPanel
+            case 0:                         // 0 = RandomPlayer
                 return new RandomPlayer(size,playerNumber);
+            case 1:
+                return new HumanPlayer(size,playerNumber,frame);
                 default:
                     System.out.println("Error in player selector");
         }
@@ -37,15 +40,20 @@ public class GameMain {
     }
 
     public int startGame(){
-        player1 = selectPlayers(player1Choice,1);
-        player2 = selectPlayers(player2Choice,2);
-        BoardFrame frame = new BoardFrame(size);
+        BoardFrame frame;
+        if(this.player1Choice == 1 || this.player2Choice == 1){
+            frame = new BoardFrame(size,1);
+        } else {
+            frame = new BoardFrame(size);
+        }
+        player1 = selectPlayers(player1Choice,1,frame);
+        player2 = selectPlayers(player2Choice,2,frame);
         int moveCounter = 0;
         while(!player1.getHasWon() && !player2.getHasWon()){
-//            long now = System.currentTimeMillis();
-//            long delta = 500;
-//            while(System.currentTimeMillis()<now+delta){
-//            }
+            long now = System.currentTimeMillis();
+            long delta = 500;
+            while(System.currentTimeMillis()<now+delta){
+            }
             int move;
             if(moveCounter%2 == 0){
                 move = player1.getMove();

@@ -5,6 +5,8 @@ package UI;
  */
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import static java.lang.Math.abs;
 import static java.lang.Math.sin;
@@ -16,10 +18,24 @@ public class HexBoardPanel extends JPanel {
     private int size;
     private int sl = 30;
     private int [][] board;
+    private MouseListener mouseListener;
+    private JTextArea textArea;
+    private BoardFrame bf;
 
-    public HexBoardPanel(int size){
+    public HexBoardPanel(int size, BoardFrame bf){
+        this.bf = bf;
         this.size=size;
         board = new int[size][size];
+    }
+
+    public HexBoardPanel(int size, int humanPlayer, BoardFrame bf){
+        this.bf = bf;
+        this.size=size;
+        board = new int[size][size];
+        this.textArea = new JTextArea("Human Player");
+        this.mouseListener = new MouseListener();
+        this.addMouseListener(this.mouseListener);
+        this.add(textArea);
     }
 
     public void paintComponent(Graphics g){
@@ -30,6 +46,8 @@ public class HexBoardPanel extends JPanel {
                 drawSpecificHex(g, i,j);
             }
         }
+
+
     }
 
     public void drawEdges(Graphics g){
@@ -86,6 +104,13 @@ public class HexBoardPanel extends JPanel {
 
     public void setBoard(int value, int x, int y){
         board[x][y] = value;
+    }
+
+
+    class MouseListener extends MouseAdapter {	//inner class inside DrawingPanel
+        public void mouseClicked(MouseEvent e) {
+            bf.setClick(e.getX(),e.getY());
+        }
     }
 
 

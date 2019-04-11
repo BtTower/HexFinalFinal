@@ -5,13 +5,13 @@ import java.util.ArrayList;
 /**
  * Created by Gleb on 10/04/2019.
  */
-public class AdjacecyMatrix {
+public class AdjacencyMatrix {
     private int [][] adjMat;
     private int size;
     private int playerNumber;
     private int border1, border2;
 
-    public AdjacecyMatrix(int size, int playerNumber){
+    public AdjacencyMatrix(int size, int playerNumber){
         this.size = size;
         this.playerNumber = playerNumber;
         this.initMatrix();
