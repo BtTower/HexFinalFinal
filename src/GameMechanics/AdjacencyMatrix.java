@@ -21,8 +21,6 @@ public class AdjacencyMatrix {
 
     }
 
-
-
     private void initMatrix(){
         adjMat = new int[size*size + 2][ size*size + 2];
         int i = 0;

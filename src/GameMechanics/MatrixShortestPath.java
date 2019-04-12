@@ -68,7 +68,7 @@ public class MatrixShortestPath {
     }
 
 
-    public void shuffleArray(int[] array) {
+    public void shuffleArray(int[] array) {   // Fisher-Yates Shuffle
         Random rand = new Random();
         for (int i = array.length - 1; i > 0; i--)
         {
