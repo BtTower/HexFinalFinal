@@ -11,7 +11,7 @@ public class Main {
         StartFrame sf = new StartFrame();
         int []theValues = sf.startReturnValues();
 
-            GameMain gm = new GameMain(theValues[0], theValues[1], theValues[2]);
+            GameMain gm = new GameMain(theValues[0], theValues[1], theValues[2], theValues);
             gm.startGame();
 
 

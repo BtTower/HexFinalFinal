@@ -15,13 +15,15 @@ public class GameMain {
     private PlayerInterface player1;    // player 1 = red
     private PlayerInterface player2;    // player 2 = blue
     private int player1Choice,player2Choice;
+    private int [] inputArgs;
 
 
-    public GameMain(int size,int player1Choice, int player2Choice){
+    public GameMain(int size,int player1Choice, int player2Choice, int[] args){
 
         this.player1Choice = player1Choice;
         this.player2Choice = player2Choice;
         this.size = size;
+        this.inputArgs = args;
     }
 
     public PlayerInterface selectPlayers(int playerChoice, int playerNumber, BoardFrame frame){
@@ -35,7 +37,9 @@ public class GameMain {
                 return new ShortestPathSimple(size,playerNumber);
             case 3:
                 return new ShortestPathBlocking(size,playerNumber);
-                default:
+            case 4:
+                return new SimpleRandomFillPlayer(size,playerNumber,inputArgs[2+playerNumber]);
+            default:
                     System.out.println("Error in player selector");
         }
         System.out.println("error in player selector");

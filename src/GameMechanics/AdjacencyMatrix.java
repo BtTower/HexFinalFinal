@@ -1,6 +1,6 @@
 package GameMechanics;
 
-import java.util.ArrayList;
+import java.util.*;
 
 /**
  * Created by Gleb on 10/04/2019.
@@ -10,11 +10,15 @@ public class AdjacencyMatrix {
     private int size;
     private int playerNumber;
     private int border1, border2;
+    private Set freeNodes;
 
     public AdjacencyMatrix(int size, int playerNumber){
         this.size = size;
         this.playerNumber = playerNumber;
         this.initMatrix();
+        this.freeNodes = new HashSet<Integer>();
+        this.setUpSet();
+
     }
 
 
@@ -62,6 +66,20 @@ public class AdjacencyMatrix {
 //        }
     }
 
+    public void setUpSet(){
+        for(int i=0;i<size*size;i++){
+            freeNodes.add(i);
+        }
+    }
+
+    public void setAdjMat(int [][]theMat){
+        for(int i =0;i<size*size+2;i++){
+            for(int j=0;j<size*size+2;j++){
+                this.adjMat[i][j] = theMat[i][j];
+            }
+        }
+    }
+
     public void displayThisMatrix(){
         this.displayMatrix(this.adjMat);
     }
@@ -88,12 +106,24 @@ public class AdjacencyMatrix {
                 addEdge((Integer)hasConnections.get(i),(Integer)hasConnections.get(j));
             }
         }
+        this.freeNodes.remove(node);
     }
 
     public void nodeLost(int node){
         for(int i=0;i<size*size+2;i++){
             removeEdge(i,node);
         }
+        this.freeNodes.remove(node);
+    }
+
+    public List getFreeNodesList(){
+        ArrayList list = new ArrayList<Integer>();
+        for(int i=0; i<size*size;i++){
+            if(this.freeNodes.contains(i)){
+                list.add(i);
+            }
+        }
+        return list;
     }
 
     public int edgeWeight(int node1, int node2){
@@ -109,12 +139,8 @@ public class AdjacencyMatrix {
     }
 
     public int[] shortestPathBetween(int node1, int node2){
-        int [][] adjMatCopy = new int[size*size+2][size*size+2];
-        for(int i=0;i<size*size+2;i++){
-            for(int j=0;j<size*size+2;j++){
-                adjMatCopy[i][j] = adjMat[i][j];
-            }
-        }
+        int [][] adjMatCopy = this.copyMatrix();
+
         MatrixShortestPath mp = new MatrixShortestPath(adjMatCopy,node1,node2,this.size);
         return mp.getShortestPath();
     }
@@ -131,14 +157,20 @@ public class AdjacencyMatrix {
         return returnValue[node1][node2];
     }
 
-    public int [][] matToPowerOf(int thePower){
-        int [][] result = new int[size*size+2][size*size+2];
-        int [][] temp = new int[size*size+2][size*size+2];
+    public int[][] copyMatrix(){
+        int [][]returnInt = new int[size*size+2][size*size+2];
         for(int i=0;i<size*size+2;i++){
             for(int j=0;j<size*size+2;j++){
-                result[i][j] = adjMat[i][j];
-          }
+                returnInt[i][j] = adjMat[i][j];
+            }
         }
+        return returnInt;
+    }
+
+    public int [][] matToPowerOf(int thePower){
+        int [][] result = copyMatrix();
+        int [][] temp = new int[size*size+2][size*size+2];
+
         for(int counter1=1;counter1<thePower;counter1++){   //Strassen’s Matrix Multiplication
             for(int i=0;i<size*size+2;i++){
                 for(int j=0;j<size*size+2;j++){
@@ -156,5 +188,11 @@ public class AdjacencyMatrix {
 
         }
         return result;
+    }
+    public int getSize(){
+        return this.size;
+    }
+    public int getPlayerNumber(){
+        return this.playerNumber;
     }
 }

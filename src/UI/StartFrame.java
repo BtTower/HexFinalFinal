@@ -10,6 +10,7 @@ public class StartFrame extends JFrame {
     private boolean hasStarted;
     private int size;
     private int player1Choice, player2Choice;
+    private int player1FillArg, player2FillArg;
 
     public StartFrame() {
         this.hasStarted = false;
@@ -33,14 +34,18 @@ public class StartFrame extends JFrame {
             }
         }
         int[]returnArray;
-        returnArray = new int[]{this.size,this.player1Choice,this.player2Choice};
+        returnArray = new int[]{this.size,this.player1Choice,this.player2Choice,this.player1FillArg,
+        this.player2FillArg};
         return returnArray;
     }
 
-    public void setHasStartedSize(boolean b, int theSize, int player1Choice, int player2Choice){
+    public void setHasStartedSize(boolean b, int theSize, int player1Choice, int player2Choice, int[]args){
         this.size = theSize;
         this.player1Choice = player1Choice;
         this.player2Choice = player2Choice;
+        this.player1FillArg = args[0];
+        this.player2FillArg = args[1];
+
         this.hasStarted = b;
     }
 
