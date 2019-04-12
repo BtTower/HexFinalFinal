@@ -31,7 +31,6 @@ public class GameMain {
             case 0:                         // 0 = RandomPlayer
                 return new RandomPlayer(size,playerNumber);
             case 1:
-
                 return new HumanPlayer(size,playerNumber,frame);
             case 2:
                 return new ShortestPathSimple(size,playerNumber);
@@ -39,11 +38,13 @@ public class GameMain {
                 return new ShortestPathBlocking(size,playerNumber);
             case 4:
                 return new SimpleRandomFillPlayer(size,playerNumber,inputArgs[2+playerNumber]);
+            case 5:
+                return new FillWithShortestPath(size,playerNumber,inputArgs[2+playerNumber]);
             default:
-                    System.out.println("Error in player selector");
+                System.out.println("error in player selector");
+                return null;
         }
-        System.out.println("error in player selector");
-        return null;
+
     }
 
     public int startGame(){
