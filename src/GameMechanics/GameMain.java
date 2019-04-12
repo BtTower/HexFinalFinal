@@ -1,9 +1,6 @@
 package GameMechanics;
 
-import Players.HumanPlayer;
-import Players.PlayerInterface;
-import Players.RandomPlayer;
-import Players.ShortestPathSimple;
+import Players.*;
 import UI.BoardFrame;
 
 import java.awt.*;
@@ -35,7 +32,9 @@ public class GameMain {
 
                 return new HumanPlayer(size,playerNumber,frame);
             case 2:
-            return new ShortestPathSimple(size,playerNumber);
+                return new ShortestPathSimple(size,playerNumber);
+            case 3:
+                return new ShortestPathBlocking(size,playerNumber);
                 default:
                     System.out.println("Error in player selector");
         }
@@ -55,7 +54,7 @@ public class GameMain {
         int moveCounter = 0;
         while(!player1.getHasWon() && !player2.getHasWon()){
             long now = System.currentTimeMillis();
-            long delta = 500;
+            long delta = 300;
             while(System.currentTimeMillis()<now+delta){
             }
             int move;
@@ -65,6 +64,10 @@ public class GameMain {
             } else {
                 move = player2.getMove();
                 player1.updateOpponentsMove(move);
+            }
+            if(frame.colourAt(move)!=0){
+                System.out.println("INVALID MOVE");
+                return -1;
             }
             frame.updateBoardAt((moveCounter%2)+1,move);
             frame.repaint();

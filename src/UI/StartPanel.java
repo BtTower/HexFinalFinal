@@ -24,7 +24,7 @@ public class StartPanel extends JPanel implements ActionListener {
 
 
     public StartPanel(StartFrame frame){
-        String [] players = {"Random Player", "Human player", "ShortestPath Simple"};
+        String [] players = {"Random Player", "Human player", "ShortestPath Simple","ShortestPathBlocking"};
         this.frame =frame;
         this.button = new JButton("Start");
         this.button.setActionCommand("Start");
@@ -35,7 +35,8 @@ public class StartPanel extends JPanel implements ActionListener {
         tf.setColumns(2);
         player1Choice = new JComboBox<>(players);
         player2Choice = new JComboBox<>(players);
-        JTextArea textArea = new JTextArea("Board Size       RedPlayer               BluePlayer");
+        JTextArea textArea = new JTextArea("Board Size      Player 1 (red)                " +
+                "    Player 2 (blue)");
         JPanel panel2 = new JPanel(new GridLayout(2,1));
         panel2.add(textArea,BorderLayout.NORTH);
         JPanel panel3 = new JPanel();

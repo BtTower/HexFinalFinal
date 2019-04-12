@@ -28,6 +28,7 @@ public class StartFrame extends JFrame {
             while(System.currentTimeMillis()<now+delta){
             }
             if(this.hasStarted == true){
+                System.out.println();     // above prints ^^^
                 break;
             }
         }

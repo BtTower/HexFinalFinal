@@ -57,6 +57,10 @@ public class BoardFrame extends JFrame {
 
     }
 
+    public int colourAt(int node){
+        return hexPanel.getAtBoard(node%size,node/size);
+    }
+
     public void setBoardTextArea(String string){
         this.hexPanel.setTextArea(string);
     }

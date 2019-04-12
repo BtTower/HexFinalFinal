@@ -111,7 +111,9 @@ public class HexBoardPanel extends JPanel {
         board[x][y] = value;
     }
 
-
+    public int getAtBoard(int x, int y){
+        return board[x][y];
+    }
 
 
     class MouseListener extends MouseAdapter {	//inner class inside DrawingPanel

@@ -57,12 +57,19 @@ public class AdjacencyMatrix {
                 addEdge(border2,size*(size-1)+i);
             }
         }
+//        for(i=0;i<size*size+2;i++){    //nodes connect to self
+//            adjMat[i][i] = 1;
+//        }
     }
 
-    public void displayMatrix(){
+    public void displayThisMatrix(){
+        this.displayMatrix(this.adjMat);
+    }
+
+    public void displayMatrix(int [][] theMatrix){
         for(int i=0;i<size*size + 2;i++){
             for(int j=0;j<size*size + 2;j++){
-                System.out.print(adjMat[i][j] + ",");
+                System.out.print(theMatrix[i][j] + ",");
             }
             System.out.println();
         }
@@ -117,5 +124,39 @@ public class AdjacencyMatrix {
             return true;
         }
         return false;
+    }
+
+    public int pathsOfLengthBetween(int length,int node1,int node2){
+        int[][] returnValue = matToPowerOf(length);
+        return returnValue[node1][node2];
+    }
+
+    public int [][] matToPowerOf(int thePower){
+        int [][] result = new int[size*size+2][size*size+2];
+        int [][] temp = new int[size*size+2][size*size+2];
+        for(int i=0;i<size*size+2;i++){
+            for(int j=0;j<size*size+2;j++){
+                result[i][j] = adjMat[i][j];
+          }
+        }
+        for(int counter1=1;counter1<thePower;counter1++){
+            System.out.println("here");
+
+            for(int i=0;i<size*size+2;i++){
+                for(int j=0;j<size*size+2;j++){
+                    temp[i][j] = result[i][j];
+                }
+            }
+            for(int j=0;j<size*size+2;j++){
+                for(int k=0;k<size*size+2;k++){
+                    result[j][k] = 0;
+                    for(int l=0;l<size*size+2;l++){
+                        result[j][k] +=  temp[j][l] * adjMat[l][k] ;
+                    }
+                }
+            }
+
+        }
+        return result;
     }
 }
