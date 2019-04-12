@@ -139,9 +139,7 @@ public class AdjacencyMatrix {
                 result[i][j] = adjMat[i][j];
           }
         }
-        for(int counter1=1;counter1<thePower;counter1++){
-            System.out.println("here");
-
+        for(int counter1=1;counter1<thePower;counter1++){   //Strassen’s Matrix Multiplication
             for(int i=0;i<size*size+2;i++){
                 for(int j=0;j<size*size+2;j++){
                     temp[i][j] = result[i][j];

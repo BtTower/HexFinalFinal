@@ -38,23 +38,17 @@ public class ShortestPathBlocking implements PlayerInterface {
         if(shared!= -1){
             theirAdjacencyMatrix.nodeLost(shared);
             ourAdjacencyMatrix.nodeWon(shared);
-            System.out.println("\n share " + shared);
-
             return shared;
         }
         if(ourPath[0]<= theirPath[0]){
             int randomInt = rand.nextInt(ourPath[0]) + 1;
             theirAdjacencyMatrix.nodeLost(ourPath[randomInt]);
             ourAdjacencyMatrix.nodeWon(ourPath[randomInt]);
-            System.out.println("ourless " + ourPath[randomInt]);
-
             return ourPath[randomInt];
         } else {
             int randomInt = rand.nextInt(theirPath[0]) + 1;
             theirAdjacencyMatrix.nodeLost(theirPath[randomInt]);
             ourAdjacencyMatrix.nodeWon(theirPath[randomInt]);
-            System.out.println("there less " + theirPath[randomInt]);
-
             return theirPath[randomInt];
         }
     }
