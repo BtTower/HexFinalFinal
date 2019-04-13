@@ -19,7 +19,7 @@ public class ShortestPathBlocking implements PlayerInterface {
         this.size = size;
         this.playerNumber = playerNumber;
         switch (this.playerNumber){
-            case (1) :
+            case 1 :
                 this.theirNumber = 2;
             default:
                 this.theirNumber = 1;
@@ -34,6 +34,14 @@ public class ShortestPathBlocking implements PlayerInterface {
         int theirPath[];
         ourPath = ourAdjacencyMatrix.shortestPathBetween(size*size,size*size+1);
         theirPath = theirAdjacencyMatrix.shortestPathBetween(size*size,size*size+1);
+        System.out.println();
+        for(int i=0;i<ourPath.length;i++){
+            System.out.print(" " + ourPath[i]);
+        }
+        System.out.println();
+        for(int i=0;i<theirPath.length;i++){
+            System.out.print(" " + theirPath[i]);
+        }
         int shared = findIfShareValue(ourPath,theirPath);
         if(shared!= -1){
             theirAdjacencyMatrix.nodeLost(shared);

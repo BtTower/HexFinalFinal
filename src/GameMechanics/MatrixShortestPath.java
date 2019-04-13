@@ -32,7 +32,10 @@ public class MatrixShortestPath {
         int currentDepth = 0;
         LinkedList<Integer> queue = new LinkedList<Integer>();
         queue.add(node1);
-        while(visitedDepth[node2] == -1){
+        while(queue.size()>0){
+            if(visitedDepth[node2] != -1){
+                break;
+            }
             currentNode = queue.poll();
             currentDepth = visitedDepth[currentNode] + 1;
             int arrayOfNodes[] = new int[size*size+2];
@@ -54,6 +57,10 @@ public class MatrixShortestPath {
             for(int j=0;j<arrayLength;j++){
                 queue.add(arrayToShuffle[j]);
             }
+        }
+        if(visitedDepth[node2] == -1){
+            int [] returnValue = new int[1];
+            return returnValue;
         }
         int [] returnValue = new int[currentDepth+1];
         returnValue[0] = currentDepth;

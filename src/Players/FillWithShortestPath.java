@@ -22,7 +22,7 @@ public class FillWithShortestPath implements PlayerInterface {
         this.fillCount =fillCount;
         this.playerNumber = playerNumber;
         switch (this.playerNumber){
-            case (1) :
+            case 1 :
                 this.theirNumber = 2;
             default:
                 this.theirNumber = 1;

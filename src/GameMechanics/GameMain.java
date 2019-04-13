@@ -3,10 +3,6 @@ package GameMechanics;
 import Players.*;
 import UI.BoardFrame;
 
-import java.awt.*;
-import java.util.Random;
-import java.util.concurrent.TimeUnit;
-
 /**
  * Created by Gleb on 10/04/2019.
  */
@@ -16,6 +12,8 @@ public class GameMain {
     private PlayerInterface player2;    // player 2 = blue
     private int player1Choice,player2Choice;
     private int [] inputArgs;
+    private boolean showBoard;
+    private int moveDelay;
 
 
     public GameMain(int size,int player1Choice, int player2Choice, int[] args){
@@ -24,6 +22,12 @@ public class GameMain {
         this.player2Choice = player2Choice;
         this.size = size;
         this.inputArgs = args;
+        this.moveDelay = args[11];
+        if(args[9] == 1){
+            this.showBoard = true;
+        } else{
+            this.showBoard =false;
+        }
     }
 
     public PlayerInterface selectPlayers(int playerChoice, int playerNumber, BoardFrame frame){
@@ -40,6 +44,8 @@ public class GameMain {
                 return new SimpleRandomFillPlayer(size,playerNumber,inputArgs[2+playerNumber]);
             case 5:
                 return new FillWithShortestPath(size,playerNumber,inputArgs[2+playerNumber]);
+            case 6:
+                return new LookAheadPathDiff(size,playerNumber,inputArgs[4+playerNumber],inputArgs[6+playerNumber]);
             default:
                 System.out.println("error in player selector");
                 return null;
@@ -47,20 +53,23 @@ public class GameMain {
 
     }
 
+
     public int startGame(){
         BoardFrame frame;
         if(player2Choice == 1 || player1Choice ==1){
             frame = new BoardFrame(size,1);    // with human player says human player on top
         } else {
-            frame = new BoardFrame(size);
+            frame = new BoardFrame(size,this.showBoard);
         }
         player1 = selectPlayers(player1Choice,1,frame);
         player2 = selectPlayers(player2Choice,2,frame);
         int moveCounter = 0;
         while(!player1.getHasWon() && !player2.getHasWon()){
             long now = System.currentTimeMillis();
-            long delta = 300;
-            while(System.currentTimeMillis()<now+delta){
+            if(moveDelay>0){
+                long delta = moveDelay;
+                while(System.currentTimeMillis()<now+delta){
+                }
             }
             int move;
             if(moveCounter%2 == 0){
@@ -71,9 +80,10 @@ public class GameMain {
                 player1.updateOpponentsMove(move);
             }
             if(frame.colourAt(move)!=0){
-                System.out.println("INVALID MOVE");
+                System.out.println("INVALID MOVE " + move);
                 return -1;
             }
+//            System.out.println("move took " + (System.currentTimeMillis()-now-this.moveDelay) + "ms");
             frame.updateBoardAt((moveCounter%2)+1,move);
             frame.repaint();
             moveCounter ++;
@@ -83,7 +93,6 @@ public class GameMain {
             String string = "Player " + ((moveCounter+1)%2 + 1) + " won";
             frame.setBoardTextArea(string);
         }
-        System.out.println("winner player :" + ((moveCounter+1)%2 + 1) );
         return ((moveCounter+1)%2 + 1);
     }
 

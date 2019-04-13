@@ -14,13 +14,16 @@ public class BoardFrame extends JFrame {
 
     private HexBoardPanel hexPanel;
 
-    public BoardFrame(int size){
+    public BoardFrame(int size,boolean show){
         this.size = size;
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         hexPanel = new HexBoardPanel(size,this);
-        this.getContentPane().add(hexPanel);
-        this.setSize(size*100, size*80);
-        this.setVisible(true);
+        if(show){
+            this.getContentPane().add(hexPanel);
+            this.setSize(size*100, size*80);
+            this.setVisible(true);
+        }
+
     }
 
     public BoardFrame(int size, int humanPlayer){

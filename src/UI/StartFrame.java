@@ -11,6 +11,8 @@ public class StartFrame extends JFrame {
     private int size;
     private int player1Choice, player2Choice;
     private int player1FillArg, player2FillArg;
+    private int player1Depth, player2Depth;
+    private int[] argsArray;
 
     public StartFrame() {
         this.hasStarted = false;
@@ -33,18 +35,18 @@ public class StartFrame extends JFrame {
                 break;
             }
         }
-        int[]returnArray;
-        returnArray = new int[]{this.size,this.player1Choice,this.player2Choice,this.player1FillArg,
-        this.player2FillArg};
-        return returnArray;
+
+        return this.argsArray;
     }
 
     public void setHasStartedSize(boolean b, int theSize, int player1Choice, int player2Choice, int[]args){
-        this.size = theSize;
-        this.player1Choice = player1Choice;
-        this.player2Choice = player2Choice;
-        this.player1FillArg = args[0];
-        this.player2FillArg = args[1];
+
+
+        this.argsArray = new int[12];
+        argsArray[0] = theSize;
+        argsArray[1] = player1Choice;
+        argsArray[2] = player2Choice;
+        System.arraycopy(args,0,argsArray,3,9);
 
         this.hasStarted = b;
     }

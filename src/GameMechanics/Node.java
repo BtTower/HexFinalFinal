@@ -4,102 +4,129 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Gleb on 12/04/2019.
+ * Created by Gleb on 13/04/2019.
  */
 public class Node {
+    private ArrayList<Node> children;
+    private AdjacencyMatrix heroAm, villainAm;
+    private int currentDepth;
     private int maxDepth;
-    private int depth;
-    private AdjacencyMatrix adjacencyMatrixHero,adjacencyMatrixVillain;
-    private List<Node> children;   // hero is current player at level
-    private Node parent;
+    private int lastMove;
+    private boolean isMaximiser;
+    private boolean isRoot;
     private boolean isTerminal;
     private int size;
-    private int move;
-    private List freeNodes;
+    private int miniMaxValue;
+    private boolean allNodes;
 
-
-
-
-    public Node(int move, Node parent, int depth, int maxDepth,
-                AdjacencyMatrix parentAdjMatHero, AdjacencyMatrix parentAdjMatVillain){
-        this.maxDepth = maxDepth;
-        this.size = parentAdjMatHero.getSize();
-        this.move = move;
-        this.children = new ArrayList<Node>();
-
-        this.depth = depth;
-
-        int [][]matTemp = parentAdjMatHero.copyMatrix();
-        this.adjacencyMatrixVillain = new AdjacencyMatrix(size,parentAdjMatHero.getPlayerNumber());
-        this.adjacencyMatrixVillain.setAdjMat(matTemp);
-
-
-        matTemp = parentAdjMatVillain.copyMatrix();
-        this.adjacencyMatrixHero = new AdjacencyMatrix(size,parentAdjMatVillain.getPlayerNumber());
-        this.adjacencyMatrixHero.setAdjMat(matTemp);
-
-        if(this.depth != 0){
-            this.parent = parent;
-            adjacencyMatrixVillain.nodeWon(move);
-            adjacencyMatrixHero.nodeLost(move);
+    public Node(int lastMove, int depth, int maxDepth, boolean allNodes, AdjacencyMatrix parentHeroAm, AdjacencyMatrix parentVilAm){
+        this.currentDepth = depth;
+        this.maxDepth =maxDepth;
+        this.lastMove = lastMove;
+        this.allNodes = allNodes;
+        if(this.currentDepth%2==0){
+            this.isMaximiser = true;
+        } else {
+            this.isMaximiser = false;
         }
-
-        this.freeNodes = new ArrayList<Integer>();
-        matTemp = adjacencyMatrixHero.copyMatrix();
-        for(int i=0;i<size*size;i++){
-            for(int j=0;j<size*size;j++){
-                if(matTemp[i][j]>0){
-                    this.freeNodes.add(i);
-                    break;
-                }
-            }
-        }
-        if(depth<maxDepth && !adjacencyMatrixHero.existsEdge(size*size,size*size+1)
-                && !adjacencyMatrixVillain.existsEdge(size*size,size*size+1)){
-            this.isTerminal = false;
-            this.makeChildren();
+        if(depth==0){
+            this.isRoot = true;
         } else{
-            Node node = this;
-            System.out.print("\ndepth " + this.depth + " moves ");
-            for(int i=0;i<this.depth;i++){
-                System.out.print(node.getMove() + " - ");
-                node = node.getParent();
+            this.isRoot = false;
+        }
+        this.size = parentHeroAm.getSize();
+
+        heroAm = new AdjacencyMatrix(parentHeroAm.getSize(),parentHeroAm.getPlayerNumber());
+        heroAm.setAdjMat(parentHeroAm.copyMatrix());
+
+        villainAm = new AdjacencyMatrix(parentVilAm.getSize(),parentVilAm.getPlayerNumber());
+        villainAm.setAdjMat(parentVilAm.copyMatrix());
+
+        if(!isRoot){
+            if(!isMaximiser){
+                heroAm.nodeWon(this.lastMove);
+                villainAm.nodeLost(this.lastMove);
+            } else {
+                heroAm.nodeLost(this.lastMove);
+                villainAm.nodeWon(this.lastMove);
             }
-            this.isTerminal = true;
+        }
+
+        if(this.currentDepth == maxDepth || heroAm.existsEdge(size*size,size*size+1)
+                || villainAm.existsEdge(size*size,size*size+1)){
+            this.isTerminal =true;
+        } else {
+            this.isTerminal = false;
+            this.fillChildren();
         }
     }
 
-    private void makeChildren(){
-        for(int i=0;i<freeNodes.size();i++){
-            this.children.add(new Node((Integer)freeNodes.get(i),this,this.depth+1,this.maxDepth, this.adjacencyMatrixHero,this.adjacencyMatrixVillain));
+    private void fillChildren(){
+        List freeMoves;
+        if(this.allNodes) {
+
+            if (this.isMaximiser) {
+                freeMoves = heroAm.getFreeNodesList();
+            } else {
+                freeMoves = villainAm.getFreeNodesList();
+            }
+        } else {
+            freeMoves = new ArrayList();
+            int []tmp = heroAm.shortestPathBetween(size*size,size*size+1);
+            for(int i=1;i<=tmp[0];i++){
+                freeMoves.add(tmp[i]);
+
+            }
+
+            tmp = villainAm.shortestPathBetween(size*size,size*size+1);
+            for(int i=1;i<=tmp[0];i++){
+                freeMoves.add(tmp[i]);
+            }
+
+        }
+        this.children = new ArrayList<Node>();
+        for(int i=0;i<freeMoves.size();i++){
+            this.children.add(new Node((int)freeMoves.get(i),this.currentDepth+1,this.maxDepth,this.allNodes,this.heroAm,this.villainAm ));
         }
     }
 
-    public void printChildren(){
-        for(int i=0;i<children.size();i++){
-            System.out.println(children.get(i).getMove());
-        }
-        children.get(0).adjacencyMatrixHero.displayThisMatrix();
-        System.out.println();
-        children.get(0).adjacencyMatrixVillain.displayThisMatrix();
+
+    public AdjacencyMatrix getHeroAm() {
+        return heroAm;
     }
 
-    public int getMove(){
-        return this.move;
+    public AdjacencyMatrix getVillainAm() {
+        return villainAm;
     }
 
-    public AdjacencyMatrix getAdjacencyMatrixHero(){
-        return this.adjacencyMatrixHero;
+    public ArrayList getChildren() {
+        return children;
     }
 
-    public AdjacencyMatrix getAdjacencyMatrixVillain(){
-        return this.adjacencyMatrixVillain;
+    public int getLastMove() {
+        return lastMove;
     }
 
-    public Node getParent(){
-        return this.parent;
+    public boolean isTerminal() {
+        return isTerminal;
     }
 
+    public int getCurrentDepth() {
+        return currentDepth;
+    }
 
+    public int getMaxDepth() {
+        return maxDepth;
+    }
 
+    public boolean isMaximiser() {
+        return isMaximiser;
+    }
+
+    public int getMiniMaxValue(){
+        return miniMaxValue;
+    }
+    public void setMiniMaxValue(int setTo){
+        this.miniMaxValue = setTo;
+    }
 }

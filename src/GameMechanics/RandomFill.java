@@ -22,7 +22,6 @@ public class RandomFill {
         this.originalAm = am;
         this.startAdjMat = am.copyMatrix();
         this.size = am.getSize();
-        System.out.println("fills " + fills);
     }
 
 

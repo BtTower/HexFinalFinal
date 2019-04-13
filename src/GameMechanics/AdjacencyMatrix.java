@@ -10,14 +10,11 @@ public class AdjacencyMatrix {
     private int size;
     private int playerNumber;
     private int border1, border2;
-    private Set freeNodes;
 
     public AdjacencyMatrix(int size, int playerNumber){
         this.size = size;
         this.playerNumber = playerNumber;
         this.initMatrix();
-        this.freeNodes = new HashSet<Integer>();
-        this.setUpSet();
 
     }
 
@@ -64,11 +61,7 @@ public class AdjacencyMatrix {
 //        }
     }
 
-    public void setUpSet(){
-        for(int i=0;i<size*size;i++){
-            freeNodes.add(i);
-        }
-    }
+
 
     public void setAdjMat(int [][]theMat){
         for(int i =0;i<size*size+2;i++){
@@ -104,21 +97,22 @@ public class AdjacencyMatrix {
                 addEdge((Integer)hasConnections.get(i),(Integer)hasConnections.get(j));
             }
         }
-        this.freeNodes.remove(node);
     }
 
     public void nodeLost(int node){
         for(int i=0;i<size*size+2;i++){
             removeEdge(i,node);
         }
-        this.freeNodes.remove(node);
     }
 
     public List getFreeNodesList(){
         ArrayList list = new ArrayList<Integer>();
-        for(int i=0; i<size*size;i++){
-            if(this.freeNodes.contains(i)){
-                list.add(i);
+        for(int i=0; i<size*size;i++){           // don't add border node
+            for(int j=0;j<size*size+2;j++){     // edge to "border Node"
+                if(this.adjMat[i][j]>0){
+                    list.add(i);
+                    break;
+                }
             }
         }
         return list;
