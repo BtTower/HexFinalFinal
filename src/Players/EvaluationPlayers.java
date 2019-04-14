@@ -2,6 +2,7 @@ package Players;
 
 import GameMechanics.AdjacencyMatrix;
 import GameMechanics.Node;
+import GameMechanics.RandomFill;
 
 import java.util.ArrayList;
 
@@ -17,11 +18,13 @@ public class EvaluationPlayers implements PlayerInterface {
     private int theirNumber;
     private int depth;
     private boolean allNodes;
+    private int fillCount;
 
-    public EvaluationPlayers(int size, int playerNumber, int depth, int reducedNodes) {
+    public EvaluationPlayers(int size, int playerNumber, int depth, int reducedNodes,int fillCount) {
         this.size = size;
         this.playerNumber = playerNumber;
         this.depth = depth;
+        this.fillCount = fillCount;
         if(reducedNodes == 1){
             this.allNodes = false;
         } else {
@@ -43,23 +46,23 @@ public class EvaluationPlayers implements PlayerInterface {
     public int getMove() {
     Node rootNode = new Node(0,0,this.depth,this.allNodes,this.ourAdjacencyMatrix,this.theirAdjacencyMatrix);
     int score = miniMax(rootNode,Integer.MIN_VALUE,Integer.MAX_VALUE);
-        System.out.println("score is " + score);
-        Node node = rootNode;
-        for(int j=0;j<depth;j++){
-            int store;
-            ArrayList<Node> listTest = node.getChildren();
-            if(listTest != null) {
-                for (int i = 0; i < listTest.size(); i++) {
-                    if (score == listTest.get(i).getMiniMaxValue()) {
-                        System.out.println("j=" + j + "move = " + listTest.get(i).getLastMove());
-                        store= i;
-                        node = listTest.get(store);
-
-                        break;
-                    }
-                }
-            }
-        }
+//        System.out.println("score is " + score);
+//        Node node = rootNode;
+//        for(int j=0;j<depth;j++){
+//            int store;
+//            ArrayList<Node> listTest = node.getChildren();
+//            if(listTest != null) {
+//                for (int i = 0; i < listTest.size(); i++) {
+//                    if (score == listTest.get(i).getMiniMaxValue()) {
+//                        System.out.println("j=" + j + "move = " + listTest.get(i).getLastMove());
+//                        store= i;
+//                        node = listTest.get(store);
+//
+//                        break;
+//                    }
+//                }
+//            }
+//        }
     if(rootNode.getChildren() == null){
         System.out.println("problem in lookahead path");
         return -1;
@@ -101,9 +104,12 @@ public class EvaluationPlayers implements PlayerInterface {
 
     public int miniMax(Node node,int alpha, int beta){      // minimax with alpha-beta prune
         if(node.isTerminal()){
-            int val = this.calculateHeuristic(node.getHeroAm(),node.getVillainAm(),node.getCurrentDepth());
-
-
+            int val;
+            if(this.fillCount > 0){
+                val = this.fillHeuristic(node.getHeroAm(),node.getVillainAm());
+            } else {
+                val = this.pathHeuristic(node.getHeroAm(),node.getVillainAm(),node.getCurrentDepth());
+            }
             node.setMiniMaxValue(val);
             return val;
         }if(node.isMaximiser()){
@@ -137,13 +143,13 @@ public class EvaluationPlayers implements PlayerInterface {
 
     }
 
-    public int calculateHeuristic(AdjacencyMatrix heroAm, AdjacencyMatrix villAm, int depth){
+    public int pathHeuristic(AdjacencyMatrix heroAm, AdjacencyMatrix villAm, int depth){
+        System.out.println("here");
+
         if(heroAm.existsEdge(size*size,size*size+1)){
-            return million*100 - million*depth;
-        }
+            return million*(100-depth);        }
         if(villAm.existsEdge(size*size,size*size+1)){
-            return million*100+ million*depth;
-        }
+            return million*(depth-100);        }
         int heroLength = heroAm.shortestPathBetween(size*size,size*size+1)[0];
         int vilLength = villAm.shortestPathBetween(size*size,size*size+1)[0];
         if(heroLength == vilLength){
@@ -153,9 +159,18 @@ public class EvaluationPlayers implements PlayerInterface {
         } else{
             return (vilLength-heroLength)*million;
         }
+    }
 
-
-
+    public int fillHeuristic(AdjacencyMatrix heroAm, AdjacencyMatrix villAm){
+        System.out.println("here");
+        if(heroAm.existsEdge(size*size,size*size+1)){
+            return million*(100-depth);
+        }
+        if(villAm.existsEdge(size*size,size*size+1)){
+            return million*(depth-100);
+        }
+        RandomFill rf = new RandomFill(heroAm,this.fillCount);
+        return rf.heuristicFillCount();
     }
 }
 

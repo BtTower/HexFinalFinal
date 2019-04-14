@@ -48,7 +48,6 @@ public class HumanPlayer implements PlayerInterface {
                 }
             }
             System.out.println("Invalid move");
-
         }
     }
     public boolean getHasWon(){
@@ -72,7 +71,7 @@ public class HumanPlayer implements PlayerInterface {
         yCordOfHex = (int)((2./3*yPointD)/sl);
         xCordOfHex = (int)(sqrt(3)/3 *xPointD-(1./3)*yPointD)/sl;
         int hexNumber = yCordOfHex * size + xCordOfHex;
-        System.out.println("(" + xPointD + "," + yPointD + ")  =  (" + xCordOfHex +  "," + yCordOfHex + ")  Node no:" + hexNumber + "   by player: " + this.playerNumber);
+//        System.out.println("(" + xPointD + "," + yPointD + ")  =  (" + xCordOfHex +  "," + yCordOfHex + ")  Node no:" + hexNumber + "   by player: " + this.playerNumber);
         if(xCordOfHex>= this.size || xCordOfHex<0 || yCordOfHex>=this.size || yCordOfHex<0){
             hexNumber = -1;
         }

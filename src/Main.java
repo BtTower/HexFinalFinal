@@ -14,10 +14,10 @@ public class Main {
         for(int i=0;i<theValues[10];i++){
             GameMain gm = new GameMain(theValues[0], theValues[1], theValues[2], theValues);
             if(gm.startGame()==1){
-                System.out.println("Red wins run " + i);
+                System.out.println("Red wins run " + (i+1));
                 redWins++;
             } else {
-                System.out.println("Blue wins run " + i);
+                System.out.println("Blue wins run " + (i+1) );
                 blueWins ++;
             }
         }

@@ -25,6 +25,7 @@ public class RandomFill {
     }
 
 
+
     public int bestMove(List nodesToTry){
         int bestWinCount = 0;
         int bestNodeIndex = 0;
@@ -43,7 +44,7 @@ public class RandomFill {
         return (Integer)nodesToTry.get(bestNodeIndex);
     }
 
-    public boolean wonAfterFill(int [][] theMatrix, int played){
+    private boolean wonAfterFill(int [][] theMatrix, int played){
         AdjacencyMatrix copiedMat = new AdjacencyMatrix(this.size,originalAm.getPlayerNumber());
         copiedMat.setAdjMat(theMatrix);
         copiedMat.nodeWon(played);
@@ -58,6 +59,27 @@ public class RandomFill {
         }
         return copiedMat.existsEdge(size*size,size*size+1);
 
+    }
+
+    public int heuristicFillCount(){
+        int won =0;
+        for(int j=0;j<fills;j++){
+            AdjacencyMatrix copiedMat = new AdjacencyMatrix(this.size,originalAm.getPlayerNumber());
+            copiedMat.setAdjMat(this.originalAm.copyMatrix());
+            List listOfNodes = copiedMat.getFreeNodesList();
+            Collections.shuffle(listOfNodes);
+            for(int i=0;i<listOfNodes.size();i++){
+                if(i%2 == 0){
+                    copiedMat.nodeLost((Integer)listOfNodes.get(i));
+                } else {
+                    copiedMat.nodeWon((Integer)listOfNodes.get(i));
+                }
+            }
+            if(copiedMat.existsEdge(size*size,size*size+1)){
+                won ++;
+            }
+        }
+        return won;
     }
 
 
