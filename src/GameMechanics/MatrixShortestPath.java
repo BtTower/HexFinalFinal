@@ -77,8 +77,7 @@ public class MatrixShortestPath {
 
     public void shuffleArray(int[] array) {   // Fisher-Yates Shuffle
         Random rand = new Random();
-        for (int i = array.length - 1; i > 0; i--)
-        {
+        for (int i = array.length - 1; i > 0; i--) {
             int index = rand.nextInt(i + 1);
             int iVal = array[index];
             array[index] = array[i];

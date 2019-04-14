@@ -1,4 +1,6 @@
+import GameMechanics.AdjacencyMatrix;
 import GameMechanics.GameMain;
+import UI.BoardFrame;
 import UI.StartFrame;
 
 public class Main {

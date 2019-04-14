@@ -62,23 +62,23 @@ public class StartPanel extends JPanel implements ActionListener {
 
 
 
-        JTextArea sizeText = new JTextArea("Size Of Board");
-        JTextArea player1Spinner = new JTextArea("Player 1 (red)");
-        JTextArea player1Args = new JTextArea("Player 1 Fill count");
-        JTextArea player2Spinner = new JTextArea("player 2 (blue)");
-        JTextArea player2Args = new JTextArea("player 2 fill count");
-        JTextArea startGame = new JTextArea("start game");
+        JLabel sizeText = new JLabel("Size Of Board");
+        JLabel player1Spinner = new JLabel("Player 1 (red)");
+        JLabel player1Args = new JLabel("Player 1 Fill count");
+        JLabel player2Spinner = new JLabel("player 2 (blue)");
+        JLabel player2Args = new JLabel("player 2 fill count");
+        JLabel startGame = new JLabel("start game");
 
-        JTextArea player1Depth = new JTextArea("Depth Of Lookahead");
-        JTextArea player2Depth = new JTextArea("Depth Of Lookahead");
+        JLabel player1Depth = new JLabel("Depth Of Lookahead");
+        JLabel player2Depth = new JLabel("Depth Of Lookahead");
 
-        JTextArea player1TreeBox = new JTextArea("Reduce tree");
-        JTextArea player2TreeBox = new JTextArea("Reduce tree");
+        JLabel player1TreeBox = new JLabel("Reduce tree");
+        JLabel player2TreeBox = new JLabel("Reduce tree");
 
-        JTextArea textShowBoard = new JTextArea("Show Board");
-        JTextArea runsText = new JTextArea("How many runs");
+        JLabel textShowBoard = new JLabel("Show Board");
+        JLabel runsText = new JLabel("How many runs");
 
-        JTextArea delayText = new JTextArea("Move time delay(ms)");
+        JLabel delayText = new JLabel("Move time delay(ms)");
 
         player1Fillargs.setValue(500);
         player2Fillargs.setValue(500);

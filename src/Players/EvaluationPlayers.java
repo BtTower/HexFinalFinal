@@ -63,10 +63,10 @@ public class EvaluationPlayers implements PlayerInterface {
 //                }
 //            }
 //        }
-    if(rootNode.getChildren() == null){
-        System.out.println("problem in lookahead path");
-        return -1;
-    }
+//    if(rootNode.getChildren() == null){
+//        System.out.println("problem in lookahead path");
+//        return -1;
+//    }
     ArrayList<Node> rootChildren = rootNode.getChildren();
     int move = -1;
     for(int i=0;i<rootChildren.size();i++){
@@ -75,17 +75,8 @@ public class EvaluationPlayers implements PlayerInterface {
             break;
         }
     }
-    if(move == -1){
+    if(move == -1) {
         System.out.println("problem in lookahead pathDiff");
-        System.out.println("root node children size = " + rootChildren.size() + "freelistsize " + ourAdjacencyMatrix.getFreeNodesList().size());
-        if(rootNode.isTerminal()){
-            System.out.println("terminal");
-        } else{
-            System.out.println("not terminal");
-//            rootNode.getHeroAm().displayThisMatrix();
-        }
-        move =  (Integer)this.ourAdjacencyMatrix.getFreeNodesList().get(0);
-
     }
     this.ourAdjacencyMatrix.nodeWon(move);
     this.theirAdjacencyMatrix.nodeLost(move);
