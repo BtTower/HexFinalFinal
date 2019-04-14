@@ -144,8 +144,6 @@ public class EvaluationPlayers implements PlayerInterface {
     }
 
     public int pathHeuristic(AdjacencyMatrix heroAm, AdjacencyMatrix villAm, int depth){
-        System.out.println("here");
-
         if(heroAm.existsEdge(size*size,size*size+1)){
             return million*(100-depth);        }
         if(villAm.existsEdge(size*size,size*size+1)){
@@ -162,7 +160,6 @@ public class EvaluationPlayers implements PlayerInterface {
     }
 
     public int fillHeuristic(AdjacencyMatrix heroAm, AdjacencyMatrix villAm){
-        System.out.println("here");
         if(heroAm.existsEdge(size*size,size*size+1)){
             return million*(100-depth);
         }
