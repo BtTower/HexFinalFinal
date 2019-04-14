@@ -45,7 +45,7 @@ public class GameMain {
             case 5:
                 return new FillWithShortestPath(size,playerNumber,inputArgs[2+playerNumber]);
             case 6:
-                return new LookAheadPathDiff(size,playerNumber,inputArgs[4+playerNumber],inputArgs[6+playerNumber]);
+                return new EvaluationPlayers(size,playerNumber,inputArgs[4+playerNumber],inputArgs[6+playerNumber]);
             default:
                 System.out.println("error in player selector");
                 return null;

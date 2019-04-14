@@ -24,6 +24,7 @@ public class FillWithShortestPath implements PlayerInterface {
         switch (this.playerNumber){
             case 1 :
                 this.theirNumber = 2;
+                break;
             default:
                 this.theirNumber = 1;
         }

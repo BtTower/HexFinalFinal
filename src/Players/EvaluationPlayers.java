@@ -8,7 +8,7 @@ import java.util.ArrayList;
 /**
  * Created by Gleb on 13/04/2019.
  */
-public class LookAheadPathDiff implements PlayerInterface {
+public class EvaluationPlayers implements PlayerInterface {
 
     private static final int million = 1000000;
     private int size;
@@ -18,7 +18,7 @@ public class LookAheadPathDiff implements PlayerInterface {
     private int depth;
     private boolean allNodes;
 
-    public LookAheadPathDiff(int size, int playerNumber, int depth, int reducedNodes) {
+    public EvaluationPlayers(int size, int playerNumber, int depth, int reducedNodes) {
         this.size = size;
         this.playerNumber = playerNumber;
         this.depth = depth;
@@ -30,11 +30,11 @@ public class LookAheadPathDiff implements PlayerInterface {
         switch (this.playerNumber) {
             case 1:
                 this.theirNumber = 2;
-            case 2:
-                this.theirNumber =1;
+                break;
             default:
-                System.out.println("Error in LookAheadPlayer number" + this.playerNumber);
+                this.theirNumber = 1;
         }
+        System.out.println("there number "  + theirNumber);
         this.ourAdjacencyMatrix = new AdjacencyMatrix(this.size, this.playerNumber);
         this.theirAdjacencyMatrix = new AdjacencyMatrix(this.size, this.theirNumber);
 

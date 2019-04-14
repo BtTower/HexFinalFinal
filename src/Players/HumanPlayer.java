@@ -61,14 +61,18 @@ public class HumanPlayer implements PlayerInterface {
 
     public int convertToHex(int xPoint, int yPoint){
         int xCordOfHex, yCordOfHex;
+        double xPointD, yPointD;
+        xPointD = xPoint;
+        yPointD = yPoint;
         int sl = 30;
-        int xSide = (int) (0.5 * sl * sqrt(3));
-        xPoint = xPoint - 75 + xSide;
-        yPoint -= 20;
-        yCordOfHex = (int)((2./3*yPoint)/sl);
-        xCordOfHex = (int)(sqrt(3)/3 *xPoint-(1./3)*yPoint)/sl;
+        double xSide =  (0.5 * sl * sqrt(3));
+        yPointD = yPointD - 20;
+        xPointD = (xPointD - 75 + 0.5*xSide + yPoint /23);   //yPoint /23 for rounding errors as you go down board
+
+        yCordOfHex = (int)((2./3*yPointD)/sl);
+        xCordOfHex = (int)(sqrt(3)/3 *xPointD-(1./3)*yPointD)/sl;
         int hexNumber = yCordOfHex * size + xCordOfHex;
-//        System.out.println("(" + xPoint + "," + yPoint + ")  =  (" + xCordOfHex +  "," + yCordOfHex + ")  Node no:" + hexNumber + "   by player: " + this.playerNumber);
+        System.out.println("(" + xPointD + "," + yPointD + ")  =  (" + xCordOfHex +  "," + yCordOfHex + ")  Node no:" + hexNumber + "   by player: " + this.playerNumber);
         if(xCordOfHex>= this.size || xCordOfHex<0 || yCordOfHex>=this.size || yCordOfHex<0){
             hexNumber = -1;
         }
