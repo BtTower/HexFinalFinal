@@ -27,6 +27,7 @@ public class StartPanel extends JPanel implements ActionListener {
     private JCheckBox displayBoardBox;
     private JSpinner runsNumber;
     private JSpinner moveDelay;
+    private JCheckBox showTime;
 
 
     public StartPanel(StartFrame frame){
@@ -47,6 +48,7 @@ public class StartPanel extends JPanel implements ActionListener {
         this.player2Lookahead = new JSpinner();
         this.player1CheckBox = new JCheckBox();
         this.player2CheckBox = new JCheckBox();
+        this.showTime = new JCheckBox();
 
         this.runsNumber = new JSpinner();
 
@@ -79,6 +81,7 @@ public class StartPanel extends JPanel implements ActionListener {
         JLabel runsText = new JLabel("How many runs");
 
         JLabel delayText = new JLabel("Move time delay(ms)");
+        JLabel timeLabel = new JLabel("Show Move Time");
 
         player1Fillargs.setValue(500);
         player2Fillargs.setValue(500);
@@ -92,18 +95,21 @@ public class StartPanel extends JPanel implements ActionListener {
         JPanel sizePanel = new JPanel(new GridLayout(2,1));
         sizePanel.add(sizeText);
         sizePanel.add(spinner);
-        metaPanel.add(sizePanel);
 
-        JPanel metaDelay = new JPanel(new GridLayout(2,1));
-        metaDelay.add(delayText);
-        metaDelay.add(moveDelay);
-        JPanel metaTopright = new JPanel(new GridLayout(2,1));
-        metaTopright.add(metaDelay);
+
+
+        JPanel metaTopright = new JPanel(new GridLayout(4,1));
+        metaTopright.add(delayText);
+        metaTopright.add(moveDelay);
         JPanel displayBoardPanel = new JPanel(new GridLayout(1,2));
         displayBoardPanel.add(textShowBoard);
         displayBoardPanel.add(displayBoardBox);
-        metaTopright.add(startGame);
+        JPanel timePanel = new JPanel(new GridLayout(1,2));
+        timePanel.add(timeLabel);
+        timePanel.add(showTime);
+
         metaPanel.add(metaTopright);
+        metaPanel.add(sizePanel);
 
         JPanel runsPanel = new JPanel(new GridLayout(2,1));
         JPanel runsTopPanel = new JPanel(new GridLayout(2,1));

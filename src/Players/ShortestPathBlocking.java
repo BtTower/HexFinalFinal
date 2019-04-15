@@ -35,14 +35,7 @@ public class ShortestPathBlocking implements PlayerInterface {
         int theirPath[];
         ourPath = ourAdjacencyMatrix.shortestPathBetween(size*size,size*size+1);
         theirPath = theirAdjacencyMatrix.shortestPathBetween(size*size,size*size+1);
-        System.out.println();
-        for(int i=0;i<ourPath.length;i++){
-            System.out.print(" " + ourPath[i]);
-        }
-        System.out.println();
-        for(int i=0;i<theirPath.length;i++){
-            System.out.print(" " + theirPath[i]);
-        }
+
         int shared = findIfShareValue(ourPath,theirPath);
         if(shared!= -1){
             theirAdjacencyMatrix.nodeLost(shared);

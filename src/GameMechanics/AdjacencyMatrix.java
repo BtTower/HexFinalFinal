@@ -78,7 +78,7 @@ public class AdjacencyMatrix {
     public void displayMatrix(int [][] theMatrix){
         for(int i=0;i<size*size + 2;i++){
             for(int j=0;j<size*size + 2;j++){
-                System.out.print(theMatrix[i][j] + ",");
+                System.out.print(theMatrix[i][j] + " ");
             }
             System.out.println();
         }

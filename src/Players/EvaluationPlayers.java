@@ -46,6 +46,7 @@ public class EvaluationPlayers implements PlayerInterface {
     Node rootNode = new Node(0,0,this.depth,this.allNodes,this.ourAdjacencyMatrix,this.theirAdjacencyMatrix);
     int score = miniMax(rootNode,Integer.MIN_VALUE,Integer.MAX_VALUE);
 //        System.out.println("score is " + score);
+
 //        Node node = rootNode;
 //        for(int j=0;j<depth;j++){
 //            int store;

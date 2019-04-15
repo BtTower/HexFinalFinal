@@ -85,10 +85,13 @@ public class GameMain {
                 System.out.println("INVALID MOVE " + move);
                 return -1;
             }
-//            System.out.println("move took " + (System.currentTimeMillis()-now-this.moveDelay) + "ms");
+
             frame.updateBoardAt((moveCounter%2)+1,move);
             frame.repaint();
             moveCounter ++;
+//            System.out.println("move took " + (System.currentTimeMillis()-now-this.moveDelay) + "ms BOARD SIZE" + this.size );
+
+//            return (int)(System.currentTimeMillis()-now-this.moveDelay);
 
         }
         if(player2Choice == 1 || player1Choice ==1) {
