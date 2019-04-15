@@ -37,7 +37,6 @@ public class EvaluationPlayers implements PlayerInterface {
             default:
                 this.theirNumber = 1;
         }
-        System.out.println("there number "  + theirNumber);
         this.ourAdjacencyMatrix = new AdjacencyMatrix(this.size, this.playerNumber);
         this.theirAdjacencyMatrix = new AdjacencyMatrix(this.size, this.theirNumber);
 

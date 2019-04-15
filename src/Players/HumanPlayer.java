@@ -29,6 +29,7 @@ public class HumanPlayer implements PlayerInterface {
 
 
     public int getMove(){
+        this.frame.setBoardTextArea("Human Turn");
 
         while(true) {
             int value[] = this.frame.getClicks();
@@ -44,10 +45,11 @@ public class HumanPlayer implements PlayerInterface {
                 if(allowedMoves[theMove] == 0){
                     this.allowedMoves[theMove] = 1;
                     this.adjacencyMatrix.nodeWon(theMove);
+                    this.frame.setBoardTextArea("");
                     return theMove;
                 }
             }
-            System.out.println("Invalid move");
+            this.frame.setBoardTextArea("Invalid Move");
         }
     }
     public boolean getHasWon(){
