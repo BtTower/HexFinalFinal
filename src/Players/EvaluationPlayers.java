@@ -19,8 +19,16 @@ public class EvaluationPlayers implements PlayerInterface {
     private int depth;
     private boolean allNodes;
     private int fillCount;
+    private boolean extra;
+
+    public EvaluationPlayers(int size, int playerNumber, int depth, int reducedNodes,int fillCount, boolean extra) {
+        this(size,playerNumber,depth,reducedNodes,fillCount);
+        this.extra = true;
+    }
+
 
     public EvaluationPlayers(int size, int playerNumber, int depth, int reducedNodes,int fillCount) {
+        this.extra = false;
         this.size = size;
         this.playerNumber = playerNumber;
         this.depth = depth;
@@ -69,6 +77,7 @@ public class EvaluationPlayers implements PlayerInterface {
 //    }
     ArrayList<Node> rootChildren = rootNode.getChildren();
     int move = -1;
+//    ArrayList potentialMoves = new ArrayList<Integer>(); // when several paths lead to same, choose one randomly;
     for(int i=0;i<rootChildren.size();i++){
         if(score == rootChildren.get(i).getMiniMaxValue()){
             move = rootChildren.get(i).getLastMove();
@@ -134,6 +143,8 @@ public class EvaluationPlayers implements PlayerInterface {
 
     }
 
+
+
     public int pathHeuristic(AdjacencyMatrix heroAm, AdjacencyMatrix villAm, int depth){
         if(heroAm.existsEdge(size*size,size*size+1)){
             return million*(100-depth);        }
@@ -146,6 +157,11 @@ public class EvaluationPlayers implements PlayerInterface {
             int vilShortestPaths = villAm.pathsOfLengthBetween(heroLength,size*size,size*size+1);
             return heroShortestPaths - vilShortestPaths;
         } else{
+            if(extra){
+                int heroShortestPaths = heroAm.pathsOfLengthBetween(heroLength,size*size,size*size+1);
+                int vilShortestPaths = villAm.pathsOfLengthBetween(heroLength,size*size,size*size+1);
+                return (vilLength-heroLength)*million+(heroShortestPaths-vilShortestPaths);
+            }
             return (vilLength-heroLength)*million;
         }
     }

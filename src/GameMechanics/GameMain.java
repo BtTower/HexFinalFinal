@@ -30,24 +30,27 @@ public class GameMain {
         }
     }
 
+
     public PlayerInterface selectPlayers(int playerChoice, int playerNumber, BoardFrame frame){
         switch (playerChoice){            // from StartPanel
             case 0:                         // 0 = RandomPlayer
-                return new RandomPlayer(size,playerNumber);
+                return new EvaluationPlayers(size,playerNumber,inputArgs[4+playerNumber],inputArgs[6+playerNumber],0,true);
             case 1:
-                return new HumanPlayer(size,playerNumber,frame);
-            case 2:
-                return new ShortestPathSimple(size,playerNumber);
-            case 3:
-                return new ShortestPathBlocking(size,playerNumber);
-            case 4:
-                return new SimpleRandomFillPlayer(size,playerNumber,inputArgs[2+playerNumber]);
-            case 5:
-                return new FillWithShortestPath(size,playerNumber,inputArgs[2+playerNumber]);
-            case 6:
-                return new EvaluationPlayers(size,playerNumber,inputArgs[4+playerNumber],inputArgs[6+playerNumber],0);
-            case 7:
                 return new EvaluationPlayers(size,playerNumber,inputArgs[4+playerNumber],inputArgs[6+playerNumber],inputArgs[2+playerNumber]);
+            case 2:
+                return new EvaluationPlayers(size,playerNumber,inputArgs[4+playerNumber],inputArgs[6+playerNumber],0);
+            case 3:
+                return new HumanPlayer(size,playerNumber,frame);
+            case 4:
+                return new ShortestPathBlocking(size,playerNumber);
+            case 5:
+                return new ShortestPathSimple(size,playerNumber);
+            case 6:
+                return new SimpleRandomFillPlayer(size,playerNumber,inputArgs[2+playerNumber]);
+            case 7:
+                return new FillWithShortestPath(size,playerNumber,inputArgs[2+playerNumber]);
+            case 8:
+                return new RandomPlayer(size,playerNumber);
             default:
                 System.out.println("error in player selector");
                 return null;
@@ -58,7 +61,7 @@ public class GameMain {
 
     public int startGame(){
         BoardFrame frame;
-        if(player2Choice == 1 || player1Choice ==1){
+        if(player2Choice == 3 || player1Choice == 3){
             frame = new BoardFrame(size,1);    // with human player says human player on top
         } else {
             frame = new BoardFrame(size,this.showBoard);
@@ -90,11 +93,11 @@ public class GameMain {
             frame.repaint();
             moveCounter ++;
 //            System.out.println("move took " + (System.currentTimeMillis()-now-this.moveDelay) + "ms BOARD SIZE" + this.size );
-
+//
 //            return (int)(System.currentTimeMillis()-now-this.moveDelay);
 
         }
-        if(player2Choice == 1 || player1Choice ==1) {
+        if(player2Choice == 3 || player1Choice ==3) {
             String string = "Player " + ((moveCounter+1)%2 + 1) + " won";
             frame.setBoardTextArea(string);
         }
