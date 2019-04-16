@@ -3,18 +3,22 @@ import GameMechanics.GameMain;
 import UI.BoardFrame;
 import UI.StartFrame;
 
+import java.time.LocalDateTime;
+
 public class Main {
 
 
     public static void main(String[] args) {
 //
+
+
         StartFrame sf = new StartFrame();
         int []theValues = sf.startReturnValues();
         for(int i=0;i<12;i++){
             System.out.print(theValues[i] + ",");
         }
         System.out.println();
-        System.out.println("started");
+        System.out.println("started " + LocalDateTime.now());
         int redWins, blueWins;
         redWins = blueWins = 0;
         for(int i=0;i<theValues[10];i++){

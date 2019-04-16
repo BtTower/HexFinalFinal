@@ -34,7 +34,6 @@ public class RandomFill {
                     winCount++;
                 }
             }
-            System.out.println(" node is " + nodesToTry.get(i) + " score " + winCount );
             if(winCount>bestWinCount){
                 bestWinCount = winCount;
                 bestNodeIndex = i;

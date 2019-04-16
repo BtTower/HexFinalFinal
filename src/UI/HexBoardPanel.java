@@ -83,6 +83,8 @@ public class HexBoardPanel extends JPanel {
             graphics.setColor(Color.RED);
         } else if(board[x][y] == 2){
             graphics.setColor(Color.BLUE);
+        } else if(board[x][y] == 3){
+            graphics.setColor(Color.PINK);
         } else {
             graphics.setColor(Color.ORANGE);
         }

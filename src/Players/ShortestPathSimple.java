@@ -29,6 +29,8 @@ public class ShortestPathSimple implements PlayerInterface {
         return path[randomInt];
     }
     public boolean getHasWon(){
+        this.adjacencyMatrix.displayThisMatrix();
+        System.out.println();
         return adjacencyMatrix.existsEdge(size*size,size*size+1);
     }
 
