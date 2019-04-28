@@ -2,9 +2,7 @@ package GameMechanics;
 
 import java.util.*;
 
-/**
- * Created by Gleb on 10/04/2019.
- */
+
 public class AdjacencyMatrix {
     private int [][] adjMat;
     private int size;

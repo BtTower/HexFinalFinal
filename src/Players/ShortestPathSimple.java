@@ -5,9 +5,7 @@ import GameMechanics.MatrixShortestPath;
 
 import java.util.Random;
 
-/**
- * Created by Gleb on 11/04/2019.
- */
+
 public class ShortestPathSimple implements PlayerInterface {
     private int size;
     private AdjacencyMatrix adjacencyMatrix;

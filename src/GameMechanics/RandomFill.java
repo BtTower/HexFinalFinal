@@ -5,9 +5,7 @@ import java.util.Collections;
 import java.util.List;
 
 
-/**
- * Created by Gleb on 12/04/2019.
- */
+
 public class RandomFill {
     private int[][] startAdjMat;
     private AdjacencyMatrix originalAm;

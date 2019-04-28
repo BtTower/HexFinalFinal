@@ -6,9 +6,7 @@ import UI.BoardFrame;
 import static java.lang.Math.sin;
 import static java.lang.StrictMath.sqrt;
 
-/**
- * Created by Gleb on 11/04/2019.
- */
+
 public class HumanPlayer implements PlayerInterface {
     private int size;
     private AdjacencyMatrix adjacencyMatrix;

@@ -2,9 +2,7 @@ package UI;
 
 import javax.swing.*;
 
-/**
- * Created by Gleb on 10/04/2019.
- */
+
 public class StartFrame extends JFrame {
     private JPanel startPanel;
     private boolean hasStarted;

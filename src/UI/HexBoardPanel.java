@@ -1,8 +1,6 @@
 package UI;
 
-/**
- * Created by Gleb on 10/04/2019.
- */
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
@@ -12,9 +10,7 @@ import static java.lang.Math.abs;
 import static java.lang.Math.sin;
 import static java.lang.Math.sqrt;
 
-/**
- * Created by Gleb on 09/04/2019.
- */
+
 public class HexBoardPanel extends JPanel {
     private int size;
     private int sl = 30;

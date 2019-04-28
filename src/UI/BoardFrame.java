@@ -1,11 +1,6 @@
 package UI;
 
-/**
- * Created by Gleb on 10/04/2019.
- */
-/**
- * Created by Gleb on 09/04/2019.
- */
+
 import javax.swing.*;
 
 public class BoardFrame extends JFrame {

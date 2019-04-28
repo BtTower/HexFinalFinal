@@ -7,9 +7,7 @@ import GameMechanics.RandomFill;
 import java.util.ArrayList;
 import java.util.Random;
 
-/**
- * Created by Gleb on 11/04/2019.
- */
+
 public class FillWithShortestPath implements PlayerInterface {
     private int size;
     private AdjacencyMatrix ourAdjacencyMatrix , theirAdjacencyMatrix;

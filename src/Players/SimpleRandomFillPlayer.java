@@ -6,9 +6,7 @@ import GameMechanics.RandomFill;
 
 
 
-/**
- * Created by Gleb on 10/04/2019.
- */
+
 public class SimpleRandomFillPlayer implements PlayerInterface {
     private int size;
     private int playerNumber;

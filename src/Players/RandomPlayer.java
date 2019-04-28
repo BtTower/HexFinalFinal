@@ -4,9 +4,7 @@ import GameMechanics.AdjacencyMatrix;
 
 import java.util.Random;
 
-/**
- * Created by Gleb on 10/04/2019.
- */
+
 public class RandomPlayer implements PlayerInterface {
     private int size;
     private int playerNumber;

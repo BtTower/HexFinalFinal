@@ -6,9 +6,7 @@ import GameMechanics.RandomFill;
 
 import java.util.ArrayList;
 
-/**
- * Created by Gleb on 13/04/2019.
- */
+
 public class EvaluationPlayers implements PlayerInterface {
 
     private static final int million = 1000000;

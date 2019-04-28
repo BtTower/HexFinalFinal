@@ -3,9 +3,7 @@ package GameMechanics;
 import Players.*;
 import UI.BoardFrame;
 
-/**
- * Created by Gleb on 10/04/2019.
- */
+
 public class GameMain {
     private int size;
     private PlayerInterface player1;    // player 1 = red

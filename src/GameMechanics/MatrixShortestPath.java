@@ -4,9 +4,7 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Random;
 
-/**
- * Created by Gleb on 11/04/2019.
- */
+
 public class MatrixShortestPath {
     private int [][] adjMat;
     private int node1,node2;

@@ -3,9 +3,7 @@ package GameMechanics;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Gleb on 13/04/2019.
- */
+
 public class Node {
     private ArrayList<Node> children;
     private AdjacencyMatrix heroAm, villainAm;

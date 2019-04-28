@@ -1,8 +1,5 @@
 package UI;
 
-/**
- * Created by Gleb on 10/04/2019.
- */
 
 
 
@@ -12,10 +9,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 
-/**
- * Created by Gleb on 11/01/2019.
- */
+
 public class StartPanel extends JPanel implements ActionListener {
+    // beautiful code
     private JButton button;
     private JSpinner spinner;
     private JSpinner player1Fillargs, player2Fillargs;
