@@ -53,30 +53,12 @@ public class EvaluationPlayers implements PlayerInterface {
     public int getMove() {
     Node rootNode = new Node(0,0,this.depth,this.allNodes,this.ourAdjacencyMatrix,this.theirAdjacencyMatrix);
     int score = miniMax(rootNode,Integer.MIN_VALUE,Integer.MAX_VALUE);
-//        System.out.println("score is " + score);
 
-//        Node node = rootNode;
-//        for(int j=0;j<depth;j++){
-//            int store;
-//            ArrayList<Node> listTest = node.getChildren();
-//            if(listTest != null) {
-//                for (int i = 0; i < listTest.size(); i++) {
-//                    if (score == listTest.get(i).getMiniMaxValue()) {
-//                        System.out.println("j=" + j + "move = " + listTest.get(i).getLastMove());
-//                        store= i;
-//                        node = listTest.get(store);
-//
-//                        break;
-//                    }
-//                }
-//            }
-//        }
-//    if(rootNode.getChildren() == null){
-//        System.out.println("problem in lookahead path");
-//        return -1;
-//    }
+
     ArrayList<Node> rootChildren = rootNode.getChildren();
     int move = -1;
+
+
 //    ArrayList potentialMoves = new ArrayList<Integer>(); // when several paths lead to same, choose one randomly;
     for(int i=0;i<rootChildren.size();i++){
         if(score == rootChildren.get(i).getMiniMaxValue()){
